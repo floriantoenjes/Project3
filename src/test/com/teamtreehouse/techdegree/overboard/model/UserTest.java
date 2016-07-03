@@ -70,6 +70,7 @@ public class UserTest {
     public void upVotingOwnQuestionIsNotAllowed() throws Exception {
 
         questioner.upVote(question);
+
     }
 
     @Test (expected = VotingException.class)
@@ -77,19 +78,22 @@ public class UserTest {
         Answer answer = respondent.answerQuestion(question, "Test Answer");
 
         respondent.upVote(answer);
+
     }
 
     @Test (expected = VotingException.class)
     public void downVotingOwnQuestionIsNotAllowed() throws Exception {
+
         questioner.downVote(question);
+
     }
 
     @Test (expected = VotingException.class)
     public void downVotingOwnAnswerIsNotAllowed() throws Exception {
-
         Answer answer = respondent.answerQuestion(question, "Test Answer");
 
         respondent.downVote(answer);
+
     }
 
     @Test
