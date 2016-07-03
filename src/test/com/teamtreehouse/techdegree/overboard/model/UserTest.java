@@ -29,21 +29,31 @@ public class UserTest {
 
     @Test
     public void questionReputationGoesUpWhenUpVoted() throws Exception {
-        int reputationBefore = questioner.getReputation();
+        int reputationBeforeUpVote = questioner.getReputation();
 
         respondent.upVote(question);
 
-        assertEquals(questioner.getReputation(), reputationBefore + 5);
+        assertEquals(questioner.getReputation(), reputationBeforeUpVote + 5);
     }
 
     @Test
     public void respondentReputationGoesUpWhenUpVoted() throws Exception {
         Answer answer = respondent.answerQuestion(question, "Test Answer!");
-        int reputationBefore = respondent.getReputation();
+        int reputationBeforeUpVote = respondent.getReputation();
 
         questioner.upVote(answer);
 
-        assertEquals(respondent.getReputation(), reputationBefore + 10);
+        assertEquals(respondent.getReputation(), reputationBeforeUpVote + 10);
+    }
+
+    @Test
+    public void respondentReputationGoesDownWhenDownVoted() throws Exception {
+        Answer answer = respondent.answerQuestion(question, "Wrong answer");
+        int reputationBeforeDownVote = respondent.getReputation();
+
+        questioner.downVote(answer);
+
+        assertEquals(respondent.getReputation(), reputationBeforeDownVote - 1);
     }
 
     @Test
