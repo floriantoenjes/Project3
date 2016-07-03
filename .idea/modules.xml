@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Stack Overflow Model Unit Tests.iml" filepath="$PROJECT_DIR$/.idea/modules/Stack Overflow Model Unit Tests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/overboard.iml" filepath="$PROJECT_DIR$/.idea/modules/overboard.iml" />
     </modules>
   </component>
 </project>
