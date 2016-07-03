@@ -7,6 +7,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class UserTest {
@@ -21,13 +22,13 @@ public class UserTest {
     @Before
     public void setUp() throws Exception {
         board = new Board("Test Board");
-        questioner = new User(board, "Questioner");
+        questioner = new User(board, "Test Questioner");
         question = questioner.askQuestion("What is a test?");
         respondent = new User(board, "Respondent");
     }
 
     @Test
-    public void questionReputationGoesUpWhenUpvoted() throws Exception {
+    public void questionReputationGoesUpWhenUpVoted() throws Exception {
         int reputationBefore = questioner.getReputation();
 
         respondent.upVote(question);
@@ -36,7 +37,7 @@ public class UserTest {
     }
 
     @Test
-    public void answerReputationGoesUpWhenUpvoted() throws Exception {
+    public void respondentReputationGoesUpWhenUpVoted() throws Exception {
         Answer answer = respondent.answerQuestion(question, "Test Answer!");
         int reputationBefore = respondent.getReputation();
 
@@ -57,6 +58,7 @@ public class UserTest {
 
     @Test (expected = VotingException.class)
     public void upVotingOwnQuestionIsNotAllowed() throws Exception {
+
         questioner.upVote(question);
     }
 
@@ -74,6 +76,7 @@ public class UserTest {
 
     @Test (expected = VotingException.class)
     public void downVotingOwnAnswerIsNotAllowed() throws Exception {
+
         Answer answer = respondent.answerQuestion(question, "Test Answer");
 
         respondent.downVote(answer);
@@ -84,7 +87,7 @@ public class UserTest {
         Answer answer = respondent.answerQuestion(question, "Test Answer");
 
         thrown.expect(AnswerAcceptanceException.class);
-        thrown.expectMessage("Only Questioner can accept this answer as it is their question");
+        thrown.expectMessage(is("Only Test Questioner can accept this answer as it is their question"));
         respondent.acceptAnswer(answer);
     }
 }
