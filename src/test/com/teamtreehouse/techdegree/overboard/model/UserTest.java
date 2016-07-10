@@ -24,7 +24,7 @@ public class UserTest {
         board = new Board("Test Board");
         questioner = new User(board, "Test Questioner");
         question = questioner.askQuestion("What is a test?");
-        respondent = new User(board, "Respondent");
+        respondent = new User(board, "Test Respondent");
     }
 
     @Test
@@ -99,9 +99,9 @@ public class UserTest {
     @Test
     public void onlyOriginalQuestionerCanAcceptAnswer() throws Exception {
         Answer answer = respondent.answerQuestion(question, "Test Answer");
-
         thrown.expect(AnswerAcceptanceException.class);
         thrown.expectMessage(is("Only Test Questioner can accept this answer as it is their question"));
+
         respondent.acceptAnswer(answer);
     }
 }
